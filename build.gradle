@@ -1,0 +1,63 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.4'
+	id 'io.spring.dependency-management' version '1.1.6'
+}
+
+subprojects {
+	group = 'com.example.franchise.core'
+	version = '0.0.1-SNAPSHOT'
+
+	apply plugin: 'java'
+	apply plugin: 'io.spring.dependency-management'
+
+	java {
+		sourceCompatibility = JavaVersion.VERSION_17
+		targetCompatibility = JavaVersion.VERSION_17
+	}
+
+	sourceSets {
+		main {
+			resources { srcDirs = ["src/main/resources"] }
+		}
+	}
+
+	repositories {
+		mavenCentral()
+	}
+
+	dependencyManagement {
+		imports {
+			mavenBom "org.springframework.cloud:spring-cloud-dependencies:2023.0.2"
+		}
+	}
+
+	dependencies {
+		// Dependencias comunes para todos los módulos
+		implementation 'org.springframework.boot:spring-boot-starter-web'
+		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+		compileOnly 'org.projectlombok:lombok'
+		annotationProcessor 'org.projectlombok:lombok'
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+		testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+		runtimeOnly 'com.mysql:mysql-connector-j'
+		implementation 'com.google.guava:guava:32.0.1-jre'
+		implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:4.0.3'
+	}
+
+	compileJava {
+		options.encoding = 'UTF-8'
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+bootJar {
+	mainClass = 'com.example.franchise.core.app.FranchiseApplication'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

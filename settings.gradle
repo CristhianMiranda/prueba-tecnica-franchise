@@ -1,0 +1,6 @@
+rootProject.name = 'franchise'
+include 'franchise-core-core'
+include 'franchise-core-app'
+include 'franchise-core-common'
+include 'franchise-core-domain'
+

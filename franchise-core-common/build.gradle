@@ -1,0 +1,9 @@
+plugins {
+    id 'org.springframework.boot'
+}
+bootJar {
+    enabled = false
+}
+dependencies {
+    implementation project(':franchise-core-domain')
+}
